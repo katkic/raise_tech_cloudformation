@@ -1,0 +1,7 @@
+################## Cloudformation Taise Tech 課題 ##################
+## Version: 1.0.0
+## Author: Daisaku kato
+## Date: 2022/01/14
+####################################################################
+AWSTemplateFormatVersion: 2010-09-09
+Description: Raise Tech exam9
