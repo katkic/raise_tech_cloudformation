@@ -18,6 +18,7 @@ Resources:
 #=============================================
 # EC2
 #=============================================
+# 1a
   EC2WebServer1a:
     Type: AWS::EC2::Instance
     Properties:
@@ -29,10 +30,12 @@ Resources:
         - Fn::ImportValue: !Sub ${VPCStack}-sg-EC2SecurityGroupSSH
         - Fn::ImportValue: !Sub ${VPCStack}-sg-EC2SecurityGroupFromELB
       KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref IAMInstanceProfile
       Tags:
         - Key: Name
           Value: RaiseTech-cfn-1a
 
+# 1c
   EC2WebServer1c:
     Type: AWS::EC2::Instance
     Properties:
@@ -44,10 +47,25 @@ Resources:
         - Fn::ImportValue: !Sub ${VPCStack}-sg-EC2SecurityGroupSSH
         - Fn::ImportValue: !Sub ${VPCStack}-sg-EC2SecurityGroupFromELB
       KeyName: !Ref KeyName
+      IamInstanceProfile: !Ref IAMInstanceProfile
       Tags:
         - Key: Name
           Value: RaiseTech-cfn-1c
 
+#=============================================
+# InstanceProfile
+#=============================================
+  IAMInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      InstanceProfileName: S3FullAccess
+      Path: /
+      Roles:
+        - Fn::ImportValue: !Sub ${VPCStack}-iam-for-EC2
+
+#=============================================
+# Outputs
+#=============================================
 Outputs:
   EC2WebServer1a:
     Description: EC2WebServer1a
